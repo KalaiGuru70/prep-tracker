@@ -12,6 +12,7 @@ app = FastAPI(title="Prep Tracker API")
 origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://prep-tracker-frontend-33hd.onrender.com",
 ]
 
 app.add_middleware(
