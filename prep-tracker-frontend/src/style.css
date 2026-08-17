@@ -1,0 +1,505 @@
+/* ===== Reset & Base ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-primary: #131315;
+  --bg-secondary: #1a1a1d;
+  --bg-card: #1f1f23;
+  --border-color: #2a2a2f;
+  --border-hover: #3a3a42;
+  --text-primary: #f5f5f7;
+  --text-secondary: #8e8e96;
+  --accent: #ff6b4a;
+  --accent-dim: #cc5539;
+  --accent-glow: rgba(255, 107, 74, 0.25);
+  --shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+body {
+  background: var(--bg-primary);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 40px 40px;
+  color: var(--text-primary);
+  font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle 500px at 20% 20%, rgba(255, 107, 74, 0.15), transparent),
+    radial-gradient(circle 500px at 80% 80%, rgba(124, 58, 237, 0.12), transparent);
+  animation: glowMove 12s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Vignette for cinematic depth */
+.app-shell::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.4) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes glowMove {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  33% {
+    transform: translate(5%, 8%);
+  }
+  66% {
+    transform: translate(-5%, -5%);
+  }
+}
+
+.app-shell {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== App Shell ===== */
+.app-shell {
+  min-height: 100vh;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar-brand {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(90deg, #ff6b4a, #ffb199, #ff6b4a);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.navbar-brand-icon {
+  font-size: 26px;
+  display: inline-block;
+  animation: bounce 2.5s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-3px) rotate(-8deg);
+  }
+}
+
+.navbar-links {
+  display: flex;
+  gap: 4px;
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-link.active {
+  color: var(--accent);
+  background: rgba(255, 107, 74, 0.1);
+}
+
+/* ===== Page Content ===== */
+.page-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 32px;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Typography ===== */
+h1 {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.6px;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+/* ===== Cards (reusable) ===== */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card {
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow), 0 0 0 1px rgba(255, 107, 74, 0.15);
+  border-color: rgba(255, 107, 74, 0.3);
+}
+
+/* ===== Buttons (reusable) ===== */
+.btn-primary {
+  background: var(--accent);
+  color: #131315;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #ff7f61;
+  box-shadow: 0 6px 20px var(--accent-glow);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--border-hover);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* ===== Stat Cards ===== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.stat-icon {
+  font-size: 28px;
+}
+
+.stat-value {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+/* ===== Streak Calendar ===== */
+.streak-calendar {
+  margin-bottom: 32px;
+  overflow-x: auto;
+}
+
+.calendar-grid {
+  display: flex;
+  gap: 4px;
+  margin-top: 16px;
+}
+
+.calendar-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.calendar-cell {
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+  background: var(--bg-secondary);
+  transition: transform 0.15s ease, outline 0.15s ease;
+}
+
+.calendar-col {
+  gap: 5px;
+}
+
+.calendar-grid {
+  gap: 5px;
+}
+
+.calendar-cell:hover {
+  transform: scale(1.3);
+  outline: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.calendar-cell.level-0 {
+  background: #1e1e22;
+}
+.calendar-cell.level-1 {
+  background: #4d2b21;
+}
+.calendar-cell.level-2 {
+  background: #8a3d28;
+}
+.calendar-cell.level-3 {
+  background: #c9502f;
+}
+.calendar-cell.level-4 {
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+.calendar-cell.level--1 {
+  background: transparent;
+}
+
+.calendar-legend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.calendar-legend .calendar-cell {
+  width: 11px;
+  height: 11px;
+}
+
+/* ===== Daily Goal Card ===== */
+.goal-card {
+  margin-bottom: 32px;
+}
+
+.goal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.goal-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.goal-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.goal-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: scale(1.05);
+}
+
+.goal-number {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  min-width: 55px;
+  text-align: center;
+}
+
+.goal-bar-track {
+  width: 100%;
+  height: 10px;
+  background: var(--bg-secondary);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.goal-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width 0.5s ease;
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.goal-bar-fill.goal-reached {
+  background: #3fb950;
+  box-shadow: 0 0 12px rgba(63, 185, 80, 0.4);
+}
+
+.goal-status {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.share-btn {
+  align-self: flex-start;
+}
+
+/* ===== Placement Countdown Card ===== */
+.countdown-card {
+  padding: 24px;
+}
+
+.countdown-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.countdown-header h2 {
+  margin-bottom: 0;
+}
+
+.countdown-days {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.countdown-status {
+  font-size: 14px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.countdown-status.on-track {
+  background: rgba(63, 185, 80, 0.12);
+  color: #3fb950;
+  border: 1px solid rgba(63, 185, 80, 0.3);
+}
+
+.countdown-status.behind {
+  background: rgba(248, 81, 73, 0.12);
+  color: #f85149;
+  border: 1px solid rgba(248, 81, 73, 0.3);
+}
+
+.countdown-detail {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.countdown-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.countdown-editor input[type="date"],
+.countdown-editor input[type="number"] {
+  width: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.countdown-editor input:focus {
+  border-color: var(--accent);
+}

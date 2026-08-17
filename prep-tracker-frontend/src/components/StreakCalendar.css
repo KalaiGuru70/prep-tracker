@@ -1,0 +1,65 @@
+/* Card wrapper — dashboard-la mattha stat cards madhiri consistent look */
+.streak-calendar.card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-top: 24px;
+}
+
+.streak-calendar h2 {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* Grid = rows of weeks (columns), each column has 7 day-cells */
+.calendar-grid {
+  display: flex;
+  gap: 3px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.calendar-col {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* Ovvoru day = oru chinna square */
+.calendar-cell {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  transition: transform 0.1s ease;
+}
+
+.calendar-cell:hover {
+  transform: scale(1.3);
+}
+
+/* Level 0 = activity illama irundha day (empty, but still visible outline) */
+.level-0 {
+  background: var(--level-0);
+  border: 1px solid var(--border-color);
+}
+
+.level-1 { background: var(--level-1); }
+.level-2 { background: var(--level-2); }
+.level-3 { background: var(--level-3); }
+.level-4 { background: var(--level-4); }
+
+/* Level -1 = future date (padding) — invisible, avlothaan */
+.level--1 {
+  background: transparent;
+  visibility: hidden;
+}
+
+.calendar-legend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
