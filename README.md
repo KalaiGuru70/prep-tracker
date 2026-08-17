@@ -1,4 +1,5 @@
 # 🎯 Daily Placement Prep Tracker
+🚀 [Live Demo](https://prep-tracker-frontend-33hd.onrender.com)
 
 A full-stack personal productivity tool that helps track daily placement preparation — DSA problems, aptitude, mock tests, and core subjects — with a GitHub-style streak calendar, daily goals, and pace prediction against a placement date.
 
