@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "https://prep-tracker-backend-m6cu.onrender.com";
 
 // Generic fetch wrapper — handles errors consistently
 async function request(endpoint, options = {}) {
